@@ -7,6 +7,7 @@ backup*
 **/*.swp
 
 # venv stuff
+venv-build/
 venv/
 # vs code
 settings.json
