@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="dcabot-zeebrow",
+    name="dcabot",
     version="0.0.4",
     author="Zeebrow",
     author_email="zeebrow@dcabot-project.com",
