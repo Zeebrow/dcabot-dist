@@ -30,21 +30,15 @@ class SendEmailNotification(object):
         email_message['To'] = self.email_to
         email_message['Bcc'] = self.email_to
         text = """\
-        Hi,
-        How are you?
-        Real Python has many great tutorials:
-        www.realpython.com"""
-        html = """\
-        <html>
-          <body>
-            <p>Hi,<br>
-               How are you?<br>
-               <a href="http://www.realpython.com">Real Python</a>
-               has many great tutorials.
-            </p>
-          </body>
-        </html>
+        test message from dcabot
         """
+        html = """\
+        "<html>
+    <body>
+        <h1>DCAbot notification</h1>
+        <p>This is a test page. And also a reminder to set up https you lazy bum you've even got the proxy figured out.</p>
+    </body>
+</html>"""
         part1 = MIMEText(text, "plain")
         part2 = MIMEText(html, "html")
 
