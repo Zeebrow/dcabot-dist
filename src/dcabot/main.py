@@ -6,7 +6,7 @@ from time import sleep
 from datetime import datetime
 from dca_config import config as conf
 from dca_config import config_utils
-from notifications.send_email import email
+from  send_email import email
 from dca_config import SecretsManager as SM
 from constants import *
 import logging

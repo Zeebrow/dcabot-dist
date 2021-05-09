@@ -1,12 +1,18 @@
-#!/usr/bin/python3
-import configparser
 import sys
+import os
 import logging
+import configparser
 
 logger = logging.getLogger(__name__)
 TRUE_STRINGS = ['Y', 'YES', 'TRUE' '1']
 FALSE_STRINGS = ['N', 'NO', 'FALSE', '0']
-DEFAULT_CONFIG_FILEPATH = "/home/mike/bin/dcabot/dcabot/etc/dcabot.conf"
+DEFAULT_CONFIG_FILEPATH = "/home/mike/bin/dcabot-minimal/etc/dcabot.conf"
+
+try:
+    os.stat(DEFAULT_CONFIG_FILEPATH)
+except FileNotFoundError:
+    logger.critical(f"Could not find configuration file at {DEFAULT_CONFIG_FILEPATH}. Exiting!")
+    exit(1)
 
 # Configuration
 config = configparser.ConfigParser()
@@ -79,19 +85,16 @@ bchusd_daily_buy = float(config['bch-usd']['daily_buy'])
 ## Email
 email_to = config['email']['email_to']
 email_from = config['email']['email_from']
+smtp_host = config['email']['smtp_host']
+smtp_port = config['email']['smtp_port']
 
-send_email_notifications = config['email']['send_email_notifications']
-if send_email_notifications.upper() in TRUE_STRINGS:
+__send_emails = config['email']['send_email_notifications']
+if __send_emails.lower() in ['ture', 'yes', '1']:
     send_email_notifications = True
-elif send_email_notifications.upper() in FALSE_STRINGS:
-    send_email_notifications = False
 else:
-    logging.warn(f"Could not read config value '{send_email_notifications}' for send_email_notifications. Setting to 'no' and proceeding.")
     send_email_notifications = False
 
-## Logging
-info_log = config['logging']['info_log']
-error_log = config['logging']['error_log']
+
 
 logger.debug(f"threshold_daily_buy :{threshold_daily_buy}")
 logger.debug(f"dcabot_home :{dcabot_home}")
@@ -99,8 +102,6 @@ logger.debug(f"btcusd_daily_buy :{btcusd_daily_buy}")
 logger.debug(f"ethusd_daily_buy :{ethusd_daily_buy}")
 logger.debug(f"email_to :{email_to}")
 logger.debug(f"email_from :{email_from}")
-logger.debug(f"info_log :{info_log}")
-logger.debug(f"error_log :{error_log}")
 logger.debug(f"send_email_notifications: {send_email_notifications}")
 logger.debug(f"usd_low_balance_alert: {usd_low_balance_alert}")
 
