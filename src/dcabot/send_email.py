@@ -33,12 +33,12 @@ class SendEmailNotification(object):
         test message from dcabot
         """
         html = """\
-        "<html>
-    <body>
-        <h1>DCAbot notification</h1>
-        <p>This is a test page. And also a reminder to set up https you lazy bum you've even got the proxy figured out.</p>
-    </body>
-</html>"""
+        <html>
+            <body>
+                <h1>DCAbot notification</h1>
+                <p>This is a test page. And also a reminder to set up https you lazy bum you've even got the proxy figured out.</p>
+            </body>
+        </html>"""
         part1 = MIMEText(text, "plain")
         part2 = MIMEText(html, "html")
 
